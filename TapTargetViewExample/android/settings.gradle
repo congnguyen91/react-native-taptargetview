@@ -1,0 +1,5 @@
+rootProject.name = 'TapTargetViewExample'
+include ':rn-taptargetview'
+project(':rn-taptargetview').projectDir = new File(rootProject.projectDir, '../node_modules/rn-taptargetview/android')
+
+include ':app'

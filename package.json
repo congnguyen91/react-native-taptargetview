@@ -1,0 +1,18 @@
+{
+    "name": "rn-taptargetview",
+    "version": "0.0.0",
+    "description": "React Native wrapper for Android TapTargetView",
+    "author": {
+        "name": "Pranav Raj Singh Chauhan",
+        "email": "pranavchauhan01@gmail.com"
+    },
+    "main": "TapTargetView.android.js",
+    "homepage": "https://github.com/prscX/rn-taptargetview",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/prscX/rn-taptargetview.git"
+    },
+    "dependencies": {
+        "prettier-pack": "0.0.2"
+    }
+}
