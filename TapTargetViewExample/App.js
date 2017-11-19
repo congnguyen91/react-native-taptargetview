@@ -24,8 +24,10 @@ export default class App extends Component<{}> {
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
         <Button
-          title="Magic",
-          ref='button'
+          key={'taptargetview'}
+          id={'taptargetview'}
+          title={'Magic'}
+          ref={'button'}
           onPress={() => {
             TapTargetView.ForView(this.refs.button)
           }}
