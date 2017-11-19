@@ -2,16 +2,27 @@
 package ui.taptargetview;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.util.Log;
 
+import com.facebook.common.internal.Objects;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.getkeepsafe.taptargetview.TapTarget;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
 
@@ -28,42 +39,114 @@ public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void ForView(final int id, Promise promise) {
+  public void ForSequence(final ReadableArray views, final ReadableMap props, final Promise promise) {
+      final Activity activity = this.getCurrentActivity();
+      final List<TapTarget> targetViews = new ArrayList<TapTarget>();
 
+      for (int i = 0;i < views.size();i++) {
+          int view = views.getInt(i);
+          targetViews.add(this.generateTapTarget(view, null));
+      }
+
+      this.getCurrentActivity().runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+              new TapTargetSequence(activity).targets(targetViews);
+          }
+      });
+
+  }
+
+  @ReactMethod
+  public void ForView(final int view, final ReadableMap props, final Promise promise) {
+      final Activity activity = this.getCurrentActivity();
+      final TapTarget targetView = generateTapTarget(view, props);
+
+      this.getCurrentActivity().runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            TapTargetView.showFor(activity, targetView);
+          }
+    });
+  }
+
+  private TapTarget generateTapTarget(final int view, final ReadableMap props) {
       final Activity activity = this.getCurrentActivity();
 
-    this.getCurrentActivity().runOnUiThread(new Runnable() {
-        @Override
-        public void run() {
+      final String title = props.getString("title");
+      final String description = props.getString("description");
 
-            TapTargetView.showFor(activity, // `this` is an Activity
-                    TapTarget.forView(activity.findViewById(id), "This is a target", "We have the best targets, believe me")
-                            // All options below are optional
-//            .outerCircleColor(R.color.red) // Specify a color for the outer circle
-                            .outerCircleAlpha(0.96f) // Specify the alpha amount for the outer circle
-//            .targetCircleColor(R.color.white) // Specify a color for the target circle
-                            .titleTextSize(20) // Specify the size (in sp) of the title text
-//            .titleTextColor(R.color.white) // Specify the color of the title text
-                            .descriptionTextSize(10) // Specify the size (in sp) of the description text
-//            .descriptionTextColor(R.color.red) // Specify the color of the description text
-//            .textColor(R.color.blue) // Specify a color for both the title and description text
-//            .textTypeface(Typeface.SANS_SERIF) // Specify a typeface for the text
-//            .dimColor(R.color.black) // If set, will dim behind the view with 30% opacity of the given color
-                            .drawShadow(true) // Whether to draw a drop shadow or not
-                            .cancelable(false) // Whether tapping outside the outer circle dismisses the view
-                            .tintTarget(true) // Whether to tint the target view's color
-                            .transparentTarget(false) // Specify whether the target is transparent (displays the content underneath)
-//            .icon(Drawable) // Specify a custom drawable to draw as the target
-                            .targetRadius(60), // Specify the target radius (in dp)
-                    new TapTargetView.Listener() { // The listener can listen for regular clicks, long clicks or cancels
-                        @Override
-                        public void onTargetClick(TapTargetView view) {
-                            super.onTargetClick(view); // This call is optional
-//            doSomething();
-                        }
-                    });
-        }
-    });
+      int outerCircleColor = 0;
+      int targetCircleColor = 0;
+      int titleTextColor = 0;
+      int descriptionTextColor = 0;
+      int textColor = 0;
+      int dimColor = 0;
 
+      // Color Codes
+      try { outerCircleColor = activity.getResources().getIdentifier(props.getString("outerCircleColor"), "color", activity.getPackageName()); } catch (Exception e) {}
+      try { targetCircleColor = activity.getResources().getIdentifier(props.getString("targetCircleColor"), "color", activity.getPackageName()); } catch (Exception e) {}
+      try { titleTextColor = activity.getResources().getIdentifier(props.getString("titleTextColor"), "color", activity.getPackageName()); } catch (Exception e) {}
+      try { descriptionTextColor = activity.getResources().getIdentifier(props.getString("descriptionTextColor"), "color", activity.getPackageName()); } catch (Exception e) {}
+      try { textColor = activity.getResources().getIdentifier(props.getString("textColor"), "color", activity.getPackageName()); } catch (Exception e) {}
+      try { dimColor = activity.getResources().getIdentifier(props.getString("dimColor"), "color", activity.getPackageName()); } catch (Exception e) {}
+
+      final int finalOuterCircleColor = outerCircleColor;
+      final int finalTargetCircleColor = targetCircleColor;
+      final int finalTitleTextColor = titleTextColor;
+      final int finalDescriptionTextColor = descriptionTextColor;
+      final int finalTextColor = textColor;
+      final int finalDimColor = dimColor;
+
+      //Other Props
+      float outerCircleAlpha = 0.96f;
+      int titleTextSize = 20;
+      int descriptionTextSize = 10;
+      boolean drawShadow = true;
+      boolean cancelable = false;
+      boolean tintTarget = true;
+      boolean transparentTarget = true;
+      int targetRadius = 60;
+
+      try { outerCircleAlpha = Float.valueOf(props.getString("outerCircleAlpha")); } catch (Exception e) {}
+      try { titleTextSize = Integer.valueOf(props.getString("titleTextSize")); } catch (Exception e) {}
+      try { descriptionTextSize = Integer.valueOf(props.getString("descriptionTextSize")); } catch (Exception e) {}
+      try { drawShadow = Boolean.valueOf(props.getString("drawShadow")); } catch (Exception e) {}
+      try { cancelable = Boolean.valueOf(props.getString("cancelable")); } catch (Exception e) {}
+      try { tintTarget = Boolean.valueOf(props.getString("tintTarget")); } catch (Exception e) {}
+      try { transparentTarget = Boolean.valueOf(props.getString("transparentTarget")); } catch (Exception e) {}
+      try { targetRadius = Integer.valueOf(props.getString("targetRadius")); } catch (Exception e) {}
+
+      float finalOuterCircleAlpha = outerCircleAlpha;
+      int finalTitleTextSize = titleTextSize;
+      int finalDescriptionTextSize = descriptionTextSize;
+      boolean finalDrawShadow = drawShadow;
+      boolean finalCancelable = cancelable;
+      boolean finalTintTarget = tintTarget;
+      boolean finalTransparentTarget = transparentTarget;
+      int finalTargetRadius = targetRadius;
+
+
+      //Populate Props
+      TapTarget targetView = TapTarget.forView(activity.findViewById(view), title, description);
+
+      if (finalOuterCircleColor != 0) targetView.outerCircleColor(finalOuterCircleColor);
+      if (finalTargetCircleColor != 0) targetView.targetCircleColor(finalTargetCircleColor);
+      if (finalTitleTextColor != 0) targetView.titleTextColor(finalTitleTextColor);
+      if (finalDescriptionTextColor != 0) targetView.descriptionTextColor(finalDescriptionTextColor);
+      if (finalTextColor != 0) targetView.textColor(finalTextColor);
+      if (finalDimColor != 0) targetView.dimColor(finalDimColor);
+
+
+      targetView.outerCircleAlpha(finalOuterCircleAlpha);
+      targetView.titleTextSize(finalTitleTextSize);
+      targetView.descriptionTextSize(finalDescriptionTextSize);
+      targetView.drawShadow(finalDrawShadow);
+      targetView.cancelable(finalCancelable);
+      targetView.tintTarget(finalTintTarget);
+      targetView.transparentTarget(finalTransparentTarget);
+      targetView.targetRadius(finalTargetRadius);
+
+      return targetView;
   }
 }

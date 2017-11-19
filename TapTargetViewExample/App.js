@@ -17,17 +17,35 @@ const instructions = Platform.select({
 })
 
 export default class App extends Component<{}> {
+  componentDidMount() {
+    TapTargetView.ForSequence([this.refs.button1, this.refs.button2], {
+      button1: {
+        title: 'Button 1 Title',
+        description: 'Button 1 Description'
+      },
+      button2: {
+        title: 'Button 2 Title',
+        description: 'Button 2 Description'
+      }
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
+        <Button title={'Magic'} ref={'button1'} onPress={() => {}} />
         <Button
           title={'Magic'}
-          ref={'button'}
+          ref={'button2'}
           onPress={() => {
-            TapTargetView.ForView(this.refs.button)
+            TapTargetView.ForView(this.refs.button2, {
+              title: 'This is a target button 2',
+              description: 'We have the best targets, believe me',
+              outerCircleColor: 'outerCircleColor'
+            })
           }}
         />
       </View>
