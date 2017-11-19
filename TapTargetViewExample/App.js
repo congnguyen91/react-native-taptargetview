@@ -17,18 +17,7 @@ const instructions = Platform.select({
 })
 
 export default class App extends Component<{}> {
-  componentDidMount() {
-    TapTargetView.ForSequence([this.refs.button1, this.refs.button2], {
-      button1: {
-        title: 'Button 1 Title',
-        description: 'Button 1 Description'
-      },
-      button2: {
-        title: 'Button 2 Title',
-        description: 'Button 2 Description'
-      }
-    })
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -41,10 +30,21 @@ export default class App extends Component<{}> {
           title={'Magic'}
           ref={'button2'}
           onPress={() => {
-            TapTargetView.ForView(this.refs.button2, {
-              title: 'This is a target button 2',
-              description: 'We have the best targets, believe me',
-              outerCircleColor: 'outerCircleColor'
+            // TapTargetView.ForView(this.refs.button2, {
+            //   title: 'This is a target button 2',
+            //   description: 'We have the best targets, believe me',
+            //   outerCircleColor: 'outerCircleColor'
+            // })
+
+            TapTargetView.ForSequence([this.refs.button1, this.refs.button2], {
+              button1: {
+                title: 'Button 1 Title',
+                description: 'Button 1 Description'
+              },
+              button2: {
+                title: 'Button 2 Title',
+                description: 'Button 2 Description'
+              }
             })
           }}
         />

@@ -45,13 +45,17 @@ public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
 
       for (int i = 0;i < views.size();i++) {
           int view = views.getInt(i);
-          targetViews.add(this.generateTapTarget(view, null));
+          String viewId = (String) props.toHashMap().keySet().toArray()[i];
+
+          targetViews.add(this.generateTapTarget(view, props.getMap(viewId)));
       }
 
       this.getCurrentActivity().runOnUiThread(new Runnable() {
           @Override
           public void run() {
-              new TapTargetSequence(activity).targets(targetViews);
+              TapTargetSequence tapTargetSequence = new TapTargetSequence(activity).targets(targetViews);
+              tapTargetSequence.continueOnCancel(true);
+              tapTargetSequence.start();
           }
       });
 
