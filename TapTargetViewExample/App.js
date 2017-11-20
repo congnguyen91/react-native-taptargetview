@@ -7,7 +7,7 @@
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View, Button } from 'react-native'
 
-import TapTargetView from 'rn-taptargetview'
+import { TapTarget, TapTargetSequence, TapTargetView } from 'rn-taptargetview'
 
 import Top from './components/Top'
 import Center from './components/Center'
@@ -21,14 +21,44 @@ const instructions = Platform.select({
 })
 
 export default class App extends Component<{}> {
-  componentDidMount() {}
+  constructor(props) {
+    super(props)
+
+    this.tapTargets = []
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      let tapTargetSequence = new TapTargetSequence()
+      this.tapTargets.forEach(tapTarget => {
+        tapTargetSequence.add(tapTarget)
+      })
+
+      TapTargetView.ShowSequence(tapTargetSequence)
+    }, 0)
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Top style={styles.top} />
-        <Center style={styles.center} />
-        <Bottom style={styles.bottom} />
+        <Top
+          style={styles.top}
+          addTapTarget={tapTarget => {
+            this.tapTargets.push(tapTarget)
+          }}
+        />
+        <Center
+          style={styles.center}
+          addTapTarget={tapTarget => {
+            this.tapTargets.push(tapTarget)
+          }}
+        />
+        <Bottom
+          style={styles.bottom}
+          addTapTarget={tapTarget => {
+            this.tapTargets.push(tapTarget)
+          }}
+        />
       </View>
     )
   }
