@@ -16,6 +16,7 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
+
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.getkeepsafe.taptargetview.TapTarget;
@@ -39,15 +40,13 @@ public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void ForSequence(final ReadableArray views, final ReadableMap props, final Promise promise) {
+  public void ShowSequence(final ReadableArray views, final ReadableMap props, final Promise promise) {
       final Activity activity = this.getCurrentActivity();
       final List<TapTarget> targetViews = new ArrayList<TapTarget>();
 
       for (int i = 0;i < views.size();i++) {
           int view = views.getInt(i);
-          String viewId = (String) props.toHashMap().keySet().toArray()[i];
-
-          targetViews.add(this.generateTapTarget(view, props.getMap(viewId)));
+          targetViews.add(this.generateTapTarget(view, props.getMap(String.valueOf(view))));
       }
 
       this.getCurrentActivity().runOnUiThread(new Runnable() {
@@ -62,7 +61,7 @@ public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void ForView(final int view, final ReadableMap props, final Promise promise) {
+  public void ShowFor(final int view, final ReadableMap props, final Promise promise) {
       final Activity activity = this.getCurrentActivity();
       final TapTarget targetView = generateTapTarget(view, props);
 
@@ -107,7 +106,7 @@ public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
       int titleTextSize = 20;
       int descriptionTextSize = 10;
       boolean drawShadow = true;
-      boolean cancelable = false;
+      boolean cancelable = true;
       boolean tintTarget = true;
       boolean transparentTarget = true;
       int targetRadius = 60;
