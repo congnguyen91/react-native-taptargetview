@@ -48,10 +48,12 @@ TapTargetView.ShowSequence(tapTargetSequence)
     - ShowSequence(TapTargets)
 
 
+# Contribution
 
+Any type of contribution will be very much appreciated
 
 # License
 
-Copyright 2017 Pranav Raj Singh Chauhan
+Copyright @2017 Pranav Raj Singh Chauhan
 
 The React Native TapTargetView is provided under the MIT License.
