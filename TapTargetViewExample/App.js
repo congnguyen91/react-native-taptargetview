@@ -9,6 +9,10 @@ import { Platform, StyleSheet, Text, View, Button } from 'react-native'
 
 import TapTargetView from 'rn-taptargetview'
 
+import Top from './components/Top'
+import Center from './components/Center'
+import Bottom from './components/Bottom'
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -22,32 +26,9 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <Button title={'Magic'} ref={'button1'} onPress={() => {}} />
-        <Button
-          title={'Magic'}
-          ref={'button2'}
-          onPress={() => {
-            // TapTargetView.ForView(this.refs.button2, {
-            //   title: 'This is a target button 2',
-            //   description: 'We have the best targets, believe me',
-            //   outerCircleColor: 'outerCircleColor'
-            // })
-
-            TapTargetView.ForSequence([this.refs.button1, this.refs.button2], {
-              button1: {
-                title: 'Button 1 Title',
-                description: 'Button 1 Description'
-              },
-              button2: {
-                title: 'Button 2 Title',
-                description: 'Button 2 Description'
-              }
-            })
-          }}
-        />
+        <Top style={styles.top} />
+        <Center style={styles.center} />
+        <Bottom style={styles.bottom} />
       </View>
     )
   }
@@ -56,18 +37,16 @@ export default class App extends Component<{}> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
+  top: {
+    flex: 1
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
+  center: {
+    flex: 1
+  },
+  bottom: {
+    flex: 1
   }
 })
