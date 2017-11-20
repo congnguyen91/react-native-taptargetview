@@ -9,6 +9,7 @@ React Native Bridge for [KeepSafe/TapTargetView](https://github.com/KeepSafe/Tap
 
 <img src="https://github.com/KeepSafe/TapTargetView/blob/master/.github/screenshot2.png" width="280" height="498" alt="Screenshot 2"/><br/>
 
+    TapTargetView
 </h1>
 
 ## Installation
