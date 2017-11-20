@@ -14,14 +14,14 @@ React Native Bridge for [KeepSafe/TapTargetView](https://github.com/KeepSafe/Tap
 ## API's
 
 - TapTarget.forView: TapTarget
-`
+~~~~
 let tapTarget = TapTarget.forView(Button, {
     title: 'This is a target button 1',
     description: 'We have the best targets, believe me'
 })
 
 TapTargetView.ShowFor(tapTarget)
-`
+~~~~
 
 - TapTargetSequence
     - add(TapTarget)
@@ -30,14 +30,14 @@ TapTargetView.ShowFor(tapTarget)
     - get(TapTarget)
     - getAll
 
-`
+~~~~
 let tapTargetSequence = new TapTargetSequence()
 this.tapTargets.forEach(tapTarget => {
 tapTargetSequence.add(tapTarget)
 })
 
 TapTargetView.ShowSequence(tapTargetSequence)
-`
+~~~~
 
 - TapTargetView
     - ShowFor(TapTarget)
