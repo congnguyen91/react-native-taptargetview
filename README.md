@@ -1,4 +1,4 @@
-# react-native-taptargetview
+# React Native TapTargetView
 React Native Wrapper for KeepSafe/TapTargetView
 
 ## Installation
