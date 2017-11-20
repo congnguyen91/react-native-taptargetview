@@ -4,8 +4,8 @@ React Native Wrapper for TapTargetView
 
 ## Installation
 
-- `$ npm install rn-taptargetview --save`
+- `$ npm install react-native-taptargetview --save`
 
-- `$ react-native link rn-taptargetview`
+- `$ react-native link react-native-taptargetview`
 
 #### [Manual Installation](./Installation.md)
