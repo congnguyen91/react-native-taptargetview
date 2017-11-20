@@ -28,14 +28,14 @@ class Top extends Component {
               TapTarget.forView(this.refs.button1, {
                 title: 'This is a target button 1',
                 description: 'We have the best targets, believe me',
-                outerCircleColor: 'outerCircleColor'
+                outerCircleColor: 'outerCircleColorPrimary'
               })
             )
             tapTargetSequence.add(
               TapTarget.forView(this.refs.button2, {
                 title: 'This is a target button 2',
                 description: 'We have the best targets, believe me',
-                outerCircleColor: 'outerCircleColor'
+                outerCircleColor: 'outerCircleColorSecondary'
               })
             )
 
