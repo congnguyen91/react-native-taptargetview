@@ -7,7 +7,11 @@
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View, Button } from 'react-native'
 
-import { TapTarget, TapTargetSequence, TapTargetView } from 'react-native-taptargetview'
+import {
+  TapTarget,
+  TapTargetSequence,
+  TapTargetView
+} from 'react-native-taptargetview'
 
 import Top from './components/Top'
 import Center from './components/Center'
@@ -35,7 +39,7 @@ export default class App extends Component<{}> {
       })
 
       TapTargetView.ShowSequence(tapTargetSequence)
-    }, 0)
+    }, 1000)
   }
 
   render() {
