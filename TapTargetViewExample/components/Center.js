@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Button } from 'react-native'
 
-import { TapTarget } from 'rn-taptargetview'
+import { TapTarget } from 'react-native-taptargetview'
 
 class Center extends Component {
   render() {
@@ -19,6 +19,7 @@ class Center extends Component {
                 })
               )
           }}
+          onPress={() => {}}
         />
         <Button
           title={'Center Center'}
@@ -32,6 +33,7 @@ class Center extends Component {
                 })
               )
           }}
+          onPress={() => {}}
         />
         <Button
           title={'Center Right'}
@@ -45,6 +47,7 @@ class Center extends Component {
                 })
               )
           }}
+          onPress={() => {}}
         />
       </View>
     )

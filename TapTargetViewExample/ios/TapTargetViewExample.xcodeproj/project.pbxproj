@@ -264,7 +264,6 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
-		888D949C314544DF8DD59625 /* RNTapTargetView.xcodeproj */ = {isa = PBXFileReference; name = "RNTapTargetView.xcodeproj"; path = "../node_modules/rn-taptargetview/ios/RNTapTargetView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		418735AA51164780989391CF /* libRNTapTargetView.a */ = {isa = PBXFileReference; name = "libRNTapTargetView.a"; path = "libRNTapTargetView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
@@ -1014,8 +1013,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/rn-taptargetview/ios",
+					"$(inherited)"
 				);
 			};
 			name = Debug;
@@ -1039,8 +1037,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/rn-taptargetview/ios",
+					"$(inherited)"
 				);
 			};
 			name = Release;
@@ -1061,8 +1058,7 @@
 				PRODUCT_NAME = TapTargetViewExample;
 				VERSIONING_SYSTEM = "apple-generic";
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/rn-taptargetview/ios",
+					"$(inherited)"
 				);
 			};
 			name = Debug;
@@ -1082,8 +1078,7 @@
 				PRODUCT_NAME = TapTargetViewExample;
 				VERSIONING_SYSTEM = "apple-generic";
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/rn-taptargetview/ios",
+					"$(inherited)"
 				);
 			};
 			name = Release;
@@ -1116,8 +1111,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/rn-taptargetview/ios",
+					"$(inherited)"
 				);
 			};
 			name = Debug;
@@ -1150,8 +1144,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/rn-taptargetview/ios",
+					"$(inherited)"
 				);
 			};
 			name = Release;

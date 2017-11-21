@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Button } from 'react-native'
 
-import { TapTarget } from 'rn-taptargetview'
+import { TapTarget } from 'react-native-taptargetview'
 
 class Top extends Component {
   render() {
@@ -19,6 +19,7 @@ class Top extends Component {
                 })
               )
           }}
+          onPress={() => {}}
         />
         <Button
           title={'Top Right'}
@@ -32,6 +33,7 @@ class Top extends Component {
                 })
               )
           }}
+          onPress={() => {}}
         />
       </View>
     )

@@ -7,7 +7,7 @@
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View, Button } from 'react-native'
 
-import { TapTarget, TapTargetSequence, TapTargetView } from 'rn-taptargetview'
+import { TapTarget, TapTargetSequence, TapTargetView } from 'react-native-taptargetview'
 
 import Top from './components/Top'
 import Center from './components/Center'
