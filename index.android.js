@@ -2,55 +2,55 @@ import { findNodeHandle, NativeModules } from 'react-native'
 
 const { RNTapTargetView } = NativeModules
 
-class TapTargetView {
+class AppTour {
   static ShowSequence(sequence) {
-    let tapTargets = sequence.getAll()
+    let appTourTargets = sequence.getAll()
 
     let viewIds = []
     let props = {}
 
-    tapTargets &&
-      tapTargets.forEach((tapTarget, key, tapTargets) => {
-        viewIds.push(tapTarget.view)
-        props[key] = tapTarget.props
+    appTourTargets &&
+      appTourTargets.forEach((appTourTarget, key, appTourTargets) => {
+        viewIds.push(appTourTarget.view)
+        props[key] = appTourTarget.props
       })
 
     RNTapTargetView.ShowSequence(viewIds, props)
   }
 
-  static ShowFor(tapTarget) {
-    RNTapTargetView.ShowFor(tapTarget.view, tapTarget.props)
+  static ShowFor(appTourTarget) {
+    RNTapTargetView.ShowFor(appTourTarget.view, appTourTarget.props)
   }
 }
 
-class TapTargetSequence {
+class AppTourSequence {
   constructor() {
-    this.tapTargets = new Map()
+    this.appTourTargets = new Map()
   }
 
-  add(tapTarget) {
-    this.tapTargets.set(tapTarget.view, tapTarget)
+  add(appTourTarget) {
+    this.appTourTargets.set(appTourTarget.view, appTourTarget)
   }
 
-  remove(tapTarget) {
-    this.tapTargets.delete(tapTarget.view)
+  remove(appTourTarget) {
+    this.appTourTargets.delete(appTourTarget.view)
   }
 
   removeAll() {
-    this.tapTargets = new Map()
+    this.appTourTargets = new Map()
   }
 
-  get(tapTarget) {
-    return this.tapTargets.get(tapTarget)
+  get(appTourTarget) {
+    return this.appTourTargets.get(appTourTarget)
   }
 
   getAll() {
-    return this.tapTargets
+    return this.appTourTargets
   }
 }
 
-class TapTarget {
-  static forView(view, props) {
+class AppTourView {
+  static for(view, props) {
     return {
       view: findNodeHandle(view),
       props: props
@@ -58,4 +58,4 @@ class TapTarget {
   }
 }
 
-export { TapTarget, TapTargetSequence, TapTargetView }
+export { AppTourView, AppTourSequence, AppTour }

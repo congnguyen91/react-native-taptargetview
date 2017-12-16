@@ -8,9 +8,9 @@ import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View, Button } from 'react-native'
 
 import {
-  TapTarget,
-  TapTargetSequence,
-  TapTargetView
+  AppTour,
+  AppTourSequence,
+  AppTourView
 } from 'react-native-taptargetview'
 
 import Top from './components/Top'
@@ -28,17 +28,17 @@ export default class App extends Component<{}> {
   constructor(props) {
     super(props)
 
-    this.tapTargets = []
+    this.appTourTargets = []
   }
 
   componentDidMount() {
     setTimeout(() => {
-      let tapTargetSequence = new TapTargetSequence()
-      this.tapTargets.forEach(tapTarget => {
-        tapTargetSequence.add(tapTarget)
+      let appTourSequence = new AppTourSequence()
+      this.appTourTargets.forEach(appTourTarget => {
+        appTourSequence.add(appTourTarget)
       })
 
-      TapTargetView.ShowSequence(tapTargetSequence)
+      AppTour.ShowSequence(appTourSequence)
     }, 1000)
   }
 
@@ -47,20 +47,20 @@ export default class App extends Component<{}> {
       <View style={styles.container}>
         <Top
           style={styles.top}
-          addTapTarget={tapTarget => {
-            this.tapTargets.push(tapTarget)
+          addAppTourTarget={appTourTarget => {
+            this.appTourTargets.push(appTourTarget)
           }}
         />
         <Center
           style={styles.center}
-          addTapTarget={tapTarget => {
-            this.tapTargets.push(tapTarget)
+          addAppTourTarget={appTourTarget => {
+            this.appTourTargets.push(appTourTarget)
           }}
         />
         <Bottom
           style={styles.bottom}
-          addTapTarget={tapTarget => {
-            this.tapTargets.push(tapTarget)
+          addAppTourTarget={appTourTarget => {
+            this.appTourTargets.push(appTourTarget)
           }}
         />
       </View>
