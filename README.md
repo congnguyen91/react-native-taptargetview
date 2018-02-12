@@ -29,7 +29,7 @@ let appTourTarget = AppTourView.for(Button, {
 AppTour.ShowFor(appTourTarget)
 ```
 
-> **Note:** App Tour Target Properties are same as defined by [aromajoin/material-showcase-ios](https://github.com/aromajoin/material-showcase-ios)
+> **Note:** App Tour Target Properties are same as defined by [KeepSafe/TapTargetView](https://github.com/KeepSafe/TapTargetView)
 
 * AppTourSequence
   * add(AppTourTarget)
