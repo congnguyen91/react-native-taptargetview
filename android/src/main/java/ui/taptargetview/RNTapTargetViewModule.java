@@ -4,6 +4,7 @@ package ui.taptargetview;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.util.Log;
 
 import com.facebook.common.internal.Objects;
@@ -79,27 +80,32 @@ public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
       final String title = props.getString("title");
       final String description = props.getString("description");
 
-      int outerCircleColor = 0;
-      int targetCircleColor = 0;
-      int titleTextColor = 0;
-      int descriptionTextColor = 0;
-      int textColor = 0;
-      int dimColor = 0;
+      String outerCircleColor = null;
+      String targetCircleColor = null;
+      String titleTextColor = null;
+      String descriptionTextColor = null;
+      String textColor = null;
+      String dimColor = null;
 
-      // Color Codes
-      try { outerCircleColor = activity.getResources().getIdentifier(props.getString("outerCircleColor"), "color", activity.getPackageName()); } catch (Exception e) {}
-      try { targetCircleColor = activity.getResources().getIdentifier(props.getString("targetCircleColor"), "color", activity.getPackageName()); } catch (Exception e) {}
-      try { titleTextColor = activity.getResources().getIdentifier(props.getString("titleTextColor"), "color", activity.getPackageName()); } catch (Exception e) {}
-      try { descriptionTextColor = activity.getResources().getIdentifier(props.getString("descriptionTextColor"), "color", activity.getPackageName()); } catch (Exception e) {}
-      try { textColor = activity.getResources().getIdentifier(props.getString("textColor"), "color", activity.getPackageName()); } catch (Exception e) {}
-      try { dimColor = activity.getResources().getIdentifier(props.getString("dimColor"), "color", activity.getPackageName()); } catch (Exception e) {}
+      if (props.hasKey("outerCircleColor") && !props.isNull("outerCircleColor")) {
+          outerCircleColor = props.getString("outerCircleColor");
+      }
+      if (props.hasKey("targetCircleColor") && !props.isNull("targetCircleColor")) {
+          targetCircleColor = props.getString("targetCircleColor");
+      }
+      if (props.hasKey("titleTextColor") && !props.isNull("titleTextColor")) {
+          titleTextColor = props.getString("titleTextColor");
+      }
+      if (props.hasKey("descriptionTextColor") && !props.isNull("descriptionTextColor")) {
+          descriptionTextColor = props.getString("descriptionTextColor");
+      }
+      if (props.hasKey("textColor") && !props.isNull("textColor")) {
+          textColor = props.getString("textColor");
+      }
+      if (props.hasKey("dimColor") && !props.isNull("dimColor")) {
+          dimColor = props.getString("dimColor");
+      }
 
-      final int finalOuterCircleColor = outerCircleColor;
-      final int finalTargetCircleColor = targetCircleColor;
-      final int finalTitleTextColor = titleTextColor;
-      final int finalDescriptionTextColor = descriptionTextColor;
-      final int finalTextColor = textColor;
-      final int finalDimColor = dimColor;
 
       //Other Props
       float outerCircleAlpha = 0.96f;
@@ -133,12 +139,12 @@ public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
       //Populate Props
       TapTarget targetView = TapTarget.forView(activity.findViewById(view), title, description);
 
-      if (finalOuterCircleColor != 0) targetView.outerCircleColor(finalOuterCircleColor);
-      if (finalTargetCircleColor != 0) targetView.targetCircleColor(finalTargetCircleColor);
-      if (finalTitleTextColor != 0) targetView.titleTextColor(finalTitleTextColor);
-      if (finalDescriptionTextColor != 0) targetView.descriptionTextColor(finalDescriptionTextColor);
-      if (finalTextColor != 0) targetView.textColor(finalTextColor);
-      if (finalDimColor != 0) targetView.dimColor(finalDimColor);
+      if (outerCircleColor != null && outerCircleColor.length() > 0) targetView.outerCircleColorInt(Color.parseColor(outerCircleColor));
+      if (targetCircleColor != null && targetCircleColor.length() > 0) targetView.targetCircleColorInt(Color.parseColor(targetCircleColor));
+      if (titleTextColor != null && titleTextColor.length() > 0) targetView.titleTextColorInt(Color.parseColor(titleTextColor));
+      if (descriptionTextColor != null && descriptionTextColor.length() > 0) targetView.descriptionTextColorInt(Color.parseColor(descriptionTextColor));
+      if (textColor != null && textColor.length() > 0) targetView.textColorInt(Color.parseColor(textColor));
+      if (dimColor != null && dimColor.length() > 0) targetView.dimColorInt(Color.parseColor(dimColor));
 
 
       targetView.outerCircleAlpha(finalOuterCircleAlpha);

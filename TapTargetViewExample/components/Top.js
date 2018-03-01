@@ -17,7 +17,7 @@ class Top extends Component {
                 AppTourView.for(ref, {
                   title: 'This is a target button 1',
                   description: 'We have the best targets, believe me',
-                  outerCircleColor: 'outerCircleColorPrimary'
+                  outerCircleColor: '#3f52ae'
                 })
               )
           }}
@@ -25,7 +25,7 @@ class Top extends Component {
             let targetView = AppTourView.for(this.button1, {
               title: 'This is a target button 1',
               description: 'We have the best targets, believe me',
-              outerCircleColor: 'outerCircleColorPrimary'
+              outerCircleColor: '#f24481'
             })
 
             AppTour.ShowFor(targetView)
@@ -39,7 +39,7 @@ class Top extends Component {
                 AppTourView.for(ref, {
                   title: 'This is a target button 2',
                   description: 'We have the best targets, believe me',
-                  outerCircleColor: 'outerCircleColorSecondary'
+                  outerCircleColor: '#f24481'
                 })
               )
           }}

@@ -15,7 +15,7 @@ class Center extends Component {
                 AppTourView.for(ref, {
                   title: 'This is a target button 3',
                   description: 'We have the best targets, believe me',
-                  outerCircleColor: 'outerCircleColorPrimary'
+                  outerCircleColor: '#3f52ae'
                 })
               )
           }}
@@ -29,7 +29,7 @@ class Center extends Component {
                 AppTourView.for(ref, {
                   title: 'This is a target button 4',
                   description: 'We have the best targets, believe me',
-                  outerCircleColor: 'outerCircleColorSecondary'
+                  outerCircleColor: '#f24481'
                 })
               )
           }}
@@ -43,7 +43,7 @@ class Center extends Component {
                 AppTourView.for(ref, {
                   title: 'This is a target button 5',
                   description: 'We have the best targets, believe me',
-                  outerCircleColor: 'outerCircleColorPrimary'
+                  outerCircleColor: '#3f52ae'
                 })
               )
           }}
