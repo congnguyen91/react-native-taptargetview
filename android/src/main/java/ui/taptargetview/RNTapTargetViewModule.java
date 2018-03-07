@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.Log;
+import android.support.annotation.Nullable;
 
 import com.facebook.common.internal.Objects;
 import com.facebook.react.bridge.Promise;
@@ -13,12 +14,17 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.ReactContext;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+
 import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.getkeepsafe.taptargetview.TapTargetSequenceListener;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.getkeepsafe.taptargetview.TapTarget;
 
@@ -26,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
+public class RNTapTargetViewModule extends ReactContextBaseJavaModule{
 
   private final ReactApplicationContext reactContext;
 
@@ -38,6 +44,15 @@ public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
   @Override
   public String getName() {
     return "RNTapTargetView";
+  }
+
+
+  private void sendEvent(ReactContext reactContext,
+                         String eventName,
+                         @Nullable WritableMap params) {
+      reactContext
+      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+      .emit(eventName, params);
   }
 
   @ReactMethod
@@ -53,9 +68,32 @@ public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
       this.getCurrentActivity().runOnUiThread(new Runnable() {
           @Override
           public void run() {
-              TapTargetSequence tapTargetSequence = new TapTargetSequence(activity).targets(targetViews);
-              tapTargetSequence.continueOnCancel(true);
-              tapTargetSequence.start();
+              TapTargetSequence tapTargetSequence = new TapTargetSequence(activity)
+              .targets(targetViews)
+              .listener(new TapTargetSequenceListener() {
+                 @Override
+                 public void onSequenceFinish() {
+                   WritableMap params = Arguments.createMap();
+                   params.putBoolean("finish", true);
+                   sendEvent(reactContext, "onFinishSequenceEvent", params);
+                 }
+
+                 @Override
+                 public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+                   WritableMap params = Arguments.createMap();
+                   params.putBoolean("next_step", true);
+                   sendEvent(reactContext, "onShowSequenceStepEvent", params);
+                 }
+
+                 @Override
+                 public void onSequenceCanceled(TapTarget lastTarget) {
+                   WritableMap params = Arguments.createMap();
+                   params.putBoolean("cancel_step", true);
+                   sendEvent(reactContext, "onCancelStepEvent", params);
+                 }
+               })
+               .continueOnCancel(true);
+               tapTargetSequence.start();
           }
       });
 
@@ -69,7 +107,12 @@ public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
       this.getCurrentActivity().runOnUiThread(new Runnable() {
           @Override
           public void run() {
-            TapTargetView.showFor(activity, targetView);
+            TapTargetView.showFor(activity, targetView, new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+                @Override
+                public void onTargetClick(TapTargetView view) {
+                    super.onTargetClick(view);
+                }
+            });
           }
     });
   }
@@ -155,7 +198,6 @@ public class RNTapTargetViewModule extends ReactContextBaseJavaModule {
       targetView.tintTarget(finalTintTarget);
       targetView.transparentTarget(finalTransparentTarget);
       targetView.targetRadius(finalTargetRadius);
-
       return targetView;
   }
 }
