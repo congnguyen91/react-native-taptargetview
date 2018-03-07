@@ -4,9 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "newclear":
+      "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build/ModuleCache/* && rm -rf node_modules/ && rm -rf ~/.rncache && yarn install && cd android && ./gradlew clean",
     "test": "jest"
   },
   "dependencies": {
+    "cache": "^2.1.0",
+    "clean": "^4.0.2",
     "react": "16.0.0",
     "react-native": "0.50.3",
     "react-native-taptargetview": "../"
