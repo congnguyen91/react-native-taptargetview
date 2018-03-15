@@ -35,5 +35,5 @@ dependencies {
     compile 'com.facebook.react:react-native:+'
     compile 'com.android.support:appcompat-v7:26+'
     compile 'com.android.support:design:26+'
-    compile 'com.github.congnguyen91:TapTargetView:1.11.0-rn'
+    compile 'com.github.congnguyen91:TapTargetView:1.11.0-react-native'
 }
